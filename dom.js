@@ -19,7 +19,7 @@ console.log("by Tag:", bytag);
 console.log(bytag[1]);
 
 //Use querySelector --> get only 1, the first found
-const byQuerySelector = document.querySelector("div.display");
+const byQuerySelector = document.querySelector(".display");
 console.log("Query1: ", byQuerySelector);
 
 //Query Selector for class
@@ -66,7 +66,7 @@ Content before paragraph
 </div> */
 
 document.write(
-  "Hey, im adding to the end of the script(js) in the Elements of browser"
+  "Hey, im adding to the end of the script(js) in the Elements of browser</br></br>"
 );
 
 ///3) Now, sending(pushing) info from JS to browser
@@ -76,4 +76,43 @@ console.log(myinfo.innerText);
 myinfo.innerHTML =
   "<h1>This one replace the div.info with paragraph inside</h1>";
 console.log(myinfo.innerHTML);
-////////UPDATING ACTUAL ELEMENTS INFO//////
+
+///2)Dynamically create elements
+
+//a)append TextNode at the end of Body element
+const elem = document.querySelector("body");
+const textNode = document.createTextNode(
+  "Hi, this is content 1 created dynamically"
+);
+elem.appendChild(textNode);
+
+//b)append Element to the end
+const newElem = document.createElement("p");
+newElem.innerText = "This is my text 2 inside new paragraph dyn";
+elem.appendChild(newElem); //overwritten by the next
+
+//c)Add Elements in the middle with "insertBefore"
+//Needs to know the element to put it before
+//example: myinfo=document.querySelector(".info");
+
+//elem=body
+elem.insertBefore(newElem, myinfo);
+elem.insertBefore(newElem, document.querySelector(".info")); //better
+//When i print body, this is updated and includes all the modifications:
+console.log(elem);
+
+//3)Deleting Elements
+// const toDelete = document.querySelector("[href='google.com']");
+// elem.removeChild(toDelete);
+
+elem.removeChild(document.querySelector("[href='google.com']"));
+
+//4)Replace Elements
+//replaceChild(newElement, oldElement)
+const newElem2 = document.createElement("a");
+newElem2.href = "https://www.google.com.au";
+newElem2.innerText = "Google Australia";
+
+elem.replaceChild(newElem2, document.querySelector("[href='amazon.com.au']"));
+
+///////MODIFY CSS
